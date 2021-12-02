@@ -6,6 +6,6 @@ export const munger = (character) => {
         birthYear: (character.birth_year),
         species: (character.species),
         homeworld: (character.homeworld),
-        starships: (character.starships)
+        starships: (character.st)
     }
 }

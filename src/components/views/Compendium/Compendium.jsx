@@ -5,7 +5,7 @@ import { fetchCharacters } from "../../services/character";
 
 function Compendium() {
     const [loading, setLoading] = useState(true);
-    const [characters, setCharacters] = useState(true);
+    const [characters, setCharacters] = useState([]);
 
     // if(characters !== 0) {
         useEffect(() => {
