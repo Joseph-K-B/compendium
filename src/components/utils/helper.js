@@ -1,11 +1,19 @@
 
-
-export const munger = (character) => {
+export const characterMunger = (character) => {
     return {
         name: (character.name),
         birthYear: (character.birth_year),
-        species: (character.species),
+        eyeColor: (character.eye_color),
+        height: (character.height),
+        mass: (character.mass),
+        species: (character.species.map((item) => item)),
         homeworld: (character.homeworld),
-        starships: (character.st)
+        starships: (character.starships.map((item) => item))
+    }
+}
+
+export const speciesMunger = (species) => {
+    return {
+        name: (species.name),        
     }
 }

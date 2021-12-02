@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import CharacterList from "../../CharacterList/CharacterList";
-import { fetchCharacters } from "../../services/character";
+import Controls from "../../Controls/Controls";
+import { fetchCharacters, fetchSpecies } from "../../services/character";
 
 
 function Compendium() {
     const [loading, setLoading] = useState(true);
     const [characters, setCharacters] = useState([]);
+    const [species, setSpecies] = useState([]);
+    const [selectedSpecies, setSelectedSpecies] = useState('')
 
     // if(characters !== 0) {
         useEffect(() => {
@@ -18,9 +21,22 @@ function Compendium() {
         }, []);
     // }
 
+    useEffect(() => {
+        const getSpecies = async () => {
+            const speciesList = await fetchSpecies();
+            setSpecies(speciesList);
+        };
+        getSpecies();
+    }, []);
+
     return (
         <section>
             <main>
+                <Controls 
+                species={species}
+                selectedSpecies={selectedSpecies}                
+                filterChange={setSelectedSpecies}
+                />
                 {loading ? (<h1>Loading...</h1>) : (
                     <CharacterList characters={characters}/>
                 )}
