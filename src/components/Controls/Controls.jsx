@@ -2,14 +2,17 @@ import React from 'react';
 import FilterForm from '../Forms/FilterForm';
 
 function Controls({
-    name,
-    species,
-    selectedSpecies,
+    planets,
+    selectedPlanet,
     filterChange
 }) {
     return(
         <div>
-            <FilterForm species={species} filterChange={filterChange} selectedSpecies={selectedSpecies}/>
+            <FilterForm 
+            planets={planets} 
+            filterChange={filterChange} 
+            selectedPlanet={selectedPlanet}
+            />
         </div>
     )
 }

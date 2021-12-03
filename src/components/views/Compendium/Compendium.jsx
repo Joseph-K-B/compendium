@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import CharacterList from "../../CharacterList/CharacterList";
 import Controls from "../../Controls/Controls";
-import { fetchCharacters, fetchSpecies } from "../../services/character";
+import { fetchCharacters, fetchPlanets, fetchResidents, fetchSpecies } from "../../services/character";
 
 
 function Compendium() {
     const [loading, setLoading] = useState(true);
     const [characters, setCharacters] = useState([]);
-    const [species, setSpecies] = useState([]);
-    const [selectedSpecies, setSelectedSpecies] = useState('')
+    const [planets, setPlanets] = useState([]);
+    const [residents, setResidents] = useState([]);
+    // const [species, setSpecies] = useState([]);
+    // const [selectedSpecies, setSelectedSpecies] = useState('')
+    const [selectedPlanet, setSelectedPlanet] = useState('main')
 
     // if(characters !== 0) {
         useEffect(() => {
@@ -21,21 +24,37 @@ function Compendium() {
         }, []);
     // }
 
+    // useEffect(() => {
+    //     const getSpecies = async () => {
+    //         const speciesList = await fetchSpecies();
+    //         setSpecies(speciesList);
+    //     };
+    //     getSpecies();
+    // }, []);
+
     useEffect(() => {
-        const getSpecies = async () => {
-            const speciesList = await fetchSpecies();
-            setSpecies(speciesList);
+        const getPlanets = async () => {
+            const planetsList = await fetchPlanets();
+            setPlanets(planetsList);
         };
-        getSpecies();
+        getPlanets();
+    }, []);
+
+    useEffect(() => {
+        const getResidents = async () => {
+            const residentList = await fetchResidents();
+            setResidents(residentList);
+        };
+        getResidents();
     }, []);
 
     return (
         <section>
             <main>
                 <Controls 
-                species={species}
-                selectedSpecies={selectedSpecies}                
-                filterChange={setSelectedSpecies}
+                planets={planets}
+                selectedPlanets={selectedPlanet}
+                filterChange={setSelectedPlanet}
                 />
                 {loading ? (<h1>Loading...</h1>) : (
                     <CharacterList characters={characters}/>

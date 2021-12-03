@@ -6,14 +6,21 @@ export const characterMunger = (character) => {
         eyeColor: (character.eye_color),
         height: (character.height),
         mass: (character.mass),
-        species: (character.species.map((item) => item)),
-        homeworld: (character.homeworld),
-        starships: (character.starships.map((item) => item))
-    }
-}
+        // speciesId: (character.species.map((item) => item.slice(-2))),
+        // homeworld: (character.homeworld.slice(-2)),
+        // starships: (character.starships.map((item) => item))
+    };
+};
+
+export const planetMunger = (planet) => {
+    return {
+        name: (planet.name),
+        // residents: (planet.residents)
+    };
+};
 
 export const speciesMunger = (species) => {
     return {
         name: (species.name),        
-    }
-}
+    };
+};

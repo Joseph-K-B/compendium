@@ -1,29 +1,53 @@
-import { characterMunger, speciesMunger } from "../utils/helper"
+import { characterMunger, planetMunger, speciesMunger } from "../utils/helper"
+
 
 
 export const fetchCharacters = async () => {
-    const res = await fetch('https://swapi.dev/api/people/')
+    const res = await fetch('https://swapi.dev/api/people/');
     const characterData = await res.json();
-    const characterMap = await characterData.results.map((data) => 
-         characterMunger(data)
-    )
+    const characterMap = await characterData.results.map((item) => 
+         characterMunger(item));
 
     return characterMap;   
 }
 
-export const fetchSpecies = async () => {
-    const res = await fetch('https://swapi.dev/api/species/');
-    const speciesData = await res.json();
-    const speciesMap = await speciesData.results.map((item) => 
-    speciesMunger(item)
-    )
-    console.log('SPECIES DATA', speciesMap)
-    return speciesMap;
-}
+export const fetchPlanets = async () => {
+    const res = await fetch('https://swapi.dev/api/planets/');
+    const planetData = await res.json();
+    const planetMap = await planetData.results.map((item) => 
+        planetMunger(item));
 
-export const fetchHomeworldId = async (id) => {
-    const res = await fetch('https://swapi.dev/api/homeworld/2/')
-    const homeworldData = await res.json()
-    console.log('HOMEWORLD', homeworldData)
-    return homeworldData
-}
+    console.log('PLANET MAP', planetMap);
+    return planetMap;
+    }
+    
+    export const fetchResidents = async () => {
+        const res = await fetch('https://swapi.dev/api/planets/8');
+        const planetData = await res.json();
+        const residentMap = await planetData.residents.map((item) => 
+        fetchHomeworld(item));
+        // if(residentMap === undefined) {
+        //     return null
+        // }
+    console.log('RESIDENTS', residentMap)
+
+    return residentMap;
+    }
+
+    export const fetchHomeworld = async (url) => {
+        const res = await fetch(url);
+        const homeworldData = await res.json();
+    
+        console.log('HOMEWORLD', characterMunger(homeworldData));
+        return characterMunger(homeworldData);
+    }
+
+// export const fetchSpecies = async () => {
+//     const res = await fetch('https://swapi.dev/api/species/');
+//     const speciesData = await res.json();
+//     const speciesMap = await speciesData.results.map((item) => 
+//         speciesMunger(item));
+
+//     return speciesMap;
+// }
+
