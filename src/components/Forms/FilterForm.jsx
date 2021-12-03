@@ -10,8 +10,8 @@ function FilterForm({planets, filterChange, selectedPlanet}) {
                 onChange={(e) => filterChange(e.target.value)}
             >
                 <option value='main' key='main'>main</option>
-                {planets.map(({name}) => (
-                    <option value={name} key={name}>{name}</option>
+                {planets.map(({url, name}) => (
+                    <option value={url} key={name}>{name}</option>
                 ))}
             </select>
             </div>

@@ -14,6 +14,7 @@ export const characterMunger = (character) => {
 
 export const planetMunger = (planet) => {
     return {
+        url: (planet.url),
         name: (planet.name),
         // residents: (planet.residents)
     };

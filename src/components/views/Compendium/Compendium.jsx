@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CharacterList from "../../CharacterList/CharacterList";
 import Controls from "../../Controls/Controls";
-import { fetchCharacters, fetchPlanets, fetchResidents, fetchSpecies } from "../../services/character";
+import { fetchCharacters, fetchHomeworld, fetchPlanets, fetchResidents, fetchSpecies } from "../../services/character";
 
 
 function Compendium() {
@@ -13,7 +13,6 @@ function Compendium() {
     // const [selectedSpecies, setSelectedSpecies] = useState('')
     const [selectedPlanet, setSelectedPlanet] = useState('main')
 
-    // if(characters !== 0) {
         useEffect(() => {
             const getCharacters = async () => {
                 const characterList = await fetchCharacters();
@@ -22,15 +21,7 @@ function Compendium() {
             };
             getCharacters();
         }, []);
-    // }
 
-    // useEffect(() => {
-    //     const getSpecies = async () => {
-    //         const speciesList = await fetchSpecies();
-    //         setSpecies(speciesList);
-    //     };
-    //     getSpecies();
-    // }, []);
 
     useEffect(() => {
         const getPlanets = async () => {
@@ -42,22 +33,25 @@ function Compendium() {
 
     useEffect(() => {
         const getResidents = async () => {
-            const residentList = await fetchResidents();
-            setResidents(residentList);
+            const residentList = await fetchResidents(selectedPlanet);
+            const residents = await fetchHomeworld();
+            setResidents(residentList)
+            setCharacters(residents)
+            setLoading(false);
         };
         getResidents();
-    }, []);
+    }, [selectedPlanet]);
 
     return (
         <section>
             <main>
                 <Controls 
                 planets={planets}
-                selectedPlanets={selectedPlanet}
+                selectedPlanet={selectedPlanet}
                 filterChange={setSelectedPlanet}
                 />
                 {loading ? (<h1>Loading...</h1>) : (
-                    <CharacterList characters={characters}/>
+                    <CharacterList characters={characters} residents={residents}/>
                 )}
             </main>
         </section>

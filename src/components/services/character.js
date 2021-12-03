@@ -21,25 +21,21 @@ export const fetchPlanets = async () => {
     return planetMap;
     }
     
-    export const fetchResidents = async () => {
-        const res = await fetch('https://swapi.dev/api/planets/8');
-        const planetData = await res.json();
-        const residentMap = await planetData.residents.map((item) => 
-        fetchHomeworld(item));
-        // if(residentMap === undefined) {
-        //     return null
-        // }
-    console.log('RESIDENTS', residentMap)
+export const fetchResidents = async (url) => {
+    const res = await fetch(url);
+    const planetData = await res.json();
+    const residentMap = await planetData.residents.map((item) => 
+    fetchHomeworld(item));
 
     return residentMap;
     }
 
-    export const fetchHomeworld = async (url) => {
-        const res = await fetch(url);
-        const homeworldData = await res.json();
+export const fetchHomeworld = async (url) => {
+    const res = await fetch(url);
+    const homeworldData = await res.json();
     
-        console.log('HOMEWORLD', characterMunger(homeworldData));
-        return characterMunger(homeworldData);
+    console.log('HOMEWORLD', characterMunger(homeworldData));
+    return characterMunger(homeworldData);
     }
 
 // export const fetchSpecies = async () => {
