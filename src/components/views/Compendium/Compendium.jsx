@@ -8,7 +8,7 @@ function Compendium() {
     const [loading, setLoading] = useState(true);
     const [characters, setCharacters] = useState([]);
     const [planets, setPlanets] = useState([]);
-    const [residents, setResidents] = useState([]);
+    // const [residents, setResidents] = useState([]);
     // const [species, setSpecies] = useState([]);
     // const [selectedSpecies, setSelectedSpecies] = useState('')
     const [selectedPlanet, setSelectedPlanet] = useState('main')
@@ -33,10 +33,18 @@ function Compendium() {
 
     useEffect(() => {
         const getResidents = async () => {
+            if(!selectedPlanet) return;
+            setLoading(true);
+            if (selectedPlanet !== 'main') {
             const residentList = await fetchResidents(selectedPlanet);
-            const residents = await fetchHomeworld();
-            setResidents(residentList)
-            setCharacters(residents)
+            // const residents = await fetchHomeworld(residentList);
+            // setCharacters(residents);
+            console.log('AT USE EFFECT', residentList)
+            setCharacters(residentList);
+            } else {
+                const characterList = await fetchCharacters();
+                setCharacters(characterList);
+            }
             setLoading(false);
         };
         getResidents();
@@ -51,7 +59,7 @@ function Compendium() {
                 filterChange={setSelectedPlanet}
                 />
                 {loading ? (<h1>Loading...</h1>) : (
-                    <CharacterList characters={characters} residents={residents}/>
+                    <CharacterList characters={characters} />
                 )}
             </main>
         </section>

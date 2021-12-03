@@ -25,16 +25,22 @@ export const fetchResidents = async (url) => {
     const res = await fetch(url);
     const planetData = await res.json();
     const residentMap = await planetData.residents.map((item) => 
-    fetchHomeworld(item));
+        fetchHomeworld(item).then(value => {
+        console.log('VALUE', value)
+        return value
+        })
+    );
 
-    return residentMap;
+        
+    //     console.log('RESIDENTS', residentMap);
+    return residentMap
     }
 
 export const fetchHomeworld = async (url) => {
     const res = await fetch(url);
     const homeworldData = await res.json();
     
-    console.log('HOMEWORLD', characterMunger(homeworldData));
+    // console.log('HOMEWORLD', characterMunger(homeworldData));
     return characterMunger(homeworldData);
     }
 
