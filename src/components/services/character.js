@@ -19,45 +19,23 @@ export const fetchPlanets = async () => {
 
     console.log('PLANET MAP', planetMap);
     return planetMap;
-    }
+}
 
-   export const fetchHomeworld = async (homeworld) => {
-       
-        const res = await fetch(homeworld);
-        const homeworldData = await res.json();
-        const homeworldMap = await homeworldData.residents.map((item) =>
-        item);
-        // const residentMap = await homeworldMap.map((item) =>
-        //     fetchResidents(item))
-        // const jsonHomeworld = await residentMap.json();
-        // const characterMap = await residentMap.map((item) =>
-        // characterMunger(item))
-        
-        console.log('FETCH HOMEWORLD', homeworldMap);
-        return homeworldMap;
-        
-    }
+export const fetchHomeworld = async (homeworld) => {
     
-// export const fetchResidents = async (url) => {
-//     const res = await fetch(url);
-//     const planetData = await res.json();
-//     const residentMap = await planetData.residents.map((item) => 
-//         fetchHomeworld(item).then(value => {
-//         console.log('VALUE', value)
-//         return value
-//         })
-//         );
-    //     console.log('RESIDENTS', residentMap);
-//     return residentMap
-// }
-
-        
-
+    const res = await fetch(homeworld);
+    const homeworldData = await res.json();
+    const homeworldMap = await homeworldData.residents.map((item) =>
+    item);        
+    console.log('FETCH HOMEWORLD', homeworldMap);
+    return homeworldMap;
+    
+}
+       
 export const fetchResidents = async (url) => {
     const res = await fetch(url);
     const homeworldData = await res.json();
 
-    console.log('HOMEWORLD', characterMunger(homeworldData));
     return characterMunger(homeworldData);
     }
 

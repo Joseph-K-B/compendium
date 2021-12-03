@@ -39,8 +39,11 @@ function Compendium() {
             if (selectedPlanet !== 'main') {
             const residentList = await fetchHomeworld(selectedPlanet);
             const residentInfo = await residentList.map((item) => fetchResidents(item)
-                .then(value => setCharacters(value)))
-                
+                .then(value => {
+                    
+                    setCharacters([value])
+                    })
+                )              
             console.log('AT USE EFFECT', residentList, residentInfo)
             // setCharacters(residentInfo);
             } else {
