@@ -6,8 +6,8 @@ export const characterMunger = (character) => {
         eyeColor: (character.eye_color),
         height: (character.height),
         mass: (character.mass),
+        homeworld: (character.homeworld),
         // speciesId: (character.species.map((item) => item.slice(-2))),
-        // homeworld: (character.homeworld.slice(-2)),
         // starships: (character.starships.map((item) => item))
     };
 };

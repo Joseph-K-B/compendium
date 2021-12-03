@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CharacterList from "../../CharacterList/CharacterList";
 import Controls from "../../Controls/Controls";
 import { fetchCharacters, fetchHomeworld, fetchPlanets, fetchResidents, fetchSpecies } from "../../services/character";
+import { characterMunger } from "../../utils/helper";
 
 
 function Compendium() {
@@ -36,11 +37,12 @@ function Compendium() {
             if(!selectedPlanet) return;
             setLoading(true);
             if (selectedPlanet !== 'main') {
-            const residentList = await fetchResidents(selectedPlanet);
-            // const residents = await fetchHomeworld(residentList);
-            // setCharacters(residents);
-            console.log('AT USE EFFECT', residentList)
-            setCharacters(residentList);
+            const residentList = await fetchHomeworld(selectedPlanet);
+            const residentInfo = await residentList.map((item) => fetchResidents(item)
+                .then(value => setCharacters(value)))
+                
+            console.log('AT USE EFFECT', residentList, residentInfo)
+            // setCharacters(residentInfo);
             } else {
                 const characterList = await fetchCharacters();
                 setCharacters(characterList);
