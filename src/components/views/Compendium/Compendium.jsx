@@ -37,14 +37,16 @@ function Compendium() {
             if(!selectedPlanet) return;
             setLoading(true);
             if (selectedPlanet !== 'main') {
+                
             const residentList = await fetchHomeworld(selectedPlanet);
-            const residentInfo = await residentList.map((item) => fetchResidents(item)
-                .then(value => {
-                    
-                    setCharacters([value])
-                    })
-                )              
-            console.log('AT USE EFFECT', residentList, residentInfo)
+            const residentMap = await fetchResidents(residentList)
+            setCharacters(residentMap);               
+                // .then(value => {
+                //     setCharacters((prevState) => [...prevState, value])
+                //     console.log('VALUE', residentMap)
+                //     })
+                // )              
+            console.log('AT USE EFFECT', residentList)
             // setCharacters(residentInfo);
             } else {
                 const characterList = await fetchCharacters();

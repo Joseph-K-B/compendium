@@ -17,7 +17,7 @@ export const fetchPlanets = async () => {
     const planetMap = await planetData.results.map((item) => 
         planetMunger(item));
 
-    console.log('PLANET MAP', planetMap);
+    // console.log('PLANET MAP', planetMap);
     return planetMap;
 }
 
@@ -27,16 +27,23 @@ export const fetchHomeworld = async (homeworld) => {
     const homeworldData = await res.json();
     const homeworldMap = await homeworldData.residents.map((item) =>
     item);        
-    console.log('FETCH HOMEWORLD', homeworldMap);
+    // console.log('FETCH HOMEWORLD', homeworldMap);
     return homeworldMap;
     
 }
-       
-export const fetchResidents = async (url) => {
-    const res = await fetch(url);
-    const homeworldData = await res.json();
 
-    return characterMunger(homeworldData);
+       
+export const fetchResidents = async (arr) => {
+    const characters = [];
+    arr.map(async (item) => {
+        const res = await fetch(item);
+        const homeworldData = await res.json();
+        const charInfo = characterMunger(homeworldData);
+        // console.log('RES', charInfo);
+        characters.push(charInfo);
+    })
+    console.log(characters);
+    return characters;
     }
 
 // export const fetchSpecies = async () => {
