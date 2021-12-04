@@ -16,7 +16,6 @@ export const fetchPlanets = async () => {
     const planetData = await res.json();
     const planetMap = await planetData.results.map((item) => 
         planetMunger(item));
-    console.log('PLANET MAP', planetMap)
     return planetMap;
 }
 

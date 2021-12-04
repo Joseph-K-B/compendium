@@ -35,10 +35,10 @@ function Compendium() {
             if(!selectedPlanet) return;
                 setLoading(true);
             if (selectedPlanet !== 'main') {                
-                const residentList = await fetchHomeworld(selectedPlanet);
-                const residentMap = await fetchResidents(residentList);                
-                setCharacters(residentMap);                            
-            console.log('AT USE EFFECT', characters)
+                const residentList = await fetchHomeworld(selectedPlanet)
+                const residentMap = await fetchResidents(residentList)               
+                    setCharacters(residentMap);                                           
+            // console.log('AT USE EFFECT', residentMap)
             } else if (selectedPlanet === 'main') {
                 const characterList = await fetchCharacters();
                 setCharacters(characterList);
@@ -47,6 +47,7 @@ function Compendium() {
         };
         getResidents();
     }, [selectedPlanet]);
+    console.log('AFTER USE EFFECT', characters)
 
     return (
         <section>
