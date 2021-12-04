@@ -9,9 +9,9 @@ function Controls({
     return(
         <div>
             <FilterForm 
-            planets={planets} 
-            filterChange={filterChange} 
-            selectedPlanet={selectedPlanet}
+                planets={planets} 
+                filterChange={filterChange} 
+                selectedPlanet={selectedPlanet}
             />
         </div>
     )

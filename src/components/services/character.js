@@ -1,4 +1,4 @@
-import { characterMunger, planetMunger, speciesMunger } from "../utils/helper"
+import { characterMunger, planetMunger } from "../utils/helper"
 
 
 
@@ -16,8 +16,6 @@ export const fetchPlanets = async () => {
     const planetData = await res.json();
     const planetMap = await planetData.results.map((item) => 
         planetMunger(item));
-
-    // console.log('PLANET MAP', planetMap);
     return planetMap;
 }
 
@@ -27,9 +25,7 @@ export const fetchHomeworld = async (homeworld) => {
     const homeworldData = await res.json();
     const homeworldMap = await homeworldData.residents.map((item) =>
     item);        
-    // console.log('FETCH HOMEWORLD', homeworldMap);
-    return homeworldMap;
-    
+    return homeworldMap;    
 }
 
        
@@ -39,12 +35,11 @@ export const fetchResidents = async (arr) => {
         const res = await fetch(item);
         const homeworldData = await res.json();
         const charInfo = characterMunger(homeworldData);
-        // console.log('RES', charInfo);
         characters.push(charInfo);
-    })
-    console.log(characters);
+    });
+    console.log('CHARACTERS', characters);
     return characters;
-    }
+}
 
 // export const fetchSpecies = async () => {
 //     const res = await fetch('https://swapi.dev/api/species/');
