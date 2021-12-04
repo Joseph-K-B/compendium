@@ -1,7 +1,13 @@
 
 
 function Character({ character }) {
-    const { name, birthYear, eyeColor, mass, height } = character
+    const { 
+        name, 
+        birthYear, 
+        eyeColor, 
+        mass, 
+        height 
+    } = character
 
     return (
         <article aria-label='character'>

@@ -16,6 +16,7 @@ export const fetchPlanets = async () => {
     const planetData = await res.json();
     const planetMap = await planetData.results.map((item) => 
         planetMunger(item));
+    console.log('PLANET MAP', planetMap)
     return planetMap;
 }
 
@@ -37,7 +38,6 @@ export const fetchResidents = async (arr) => {
         const charInfo = characterMunger(homeworldData);
         characters.push(charInfo);
     });
-    console.log('CHARACTERS', characters);
     return characters;
 }
 

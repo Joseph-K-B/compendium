@@ -1,6 +1,11 @@
 
 
-function FilterForm({planets, filterChange, selectedPlanet}) {
+function FilterForm({
+    // url,
+    planets, 
+    filterChange, 
+    selectedPlanet
+}) {
     return (
         <section>
             <div>
